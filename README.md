@@ -106,3 +106,30 @@ type Account struct {
 	Currency string          `json:"currency" db:"currency"`
 }
 ```
+
+## How to contribute
+
+- Fork this repo
+- Clone the main repo, and add your fork as a remote
+
+  ```
+  git clone git@github.com:donmikel/coins.git
+  cd ./coins
+  git remote rename origin upstream
+  git remote add origin git@github.com:donmikel/coins.git
+  ```
+
+- Create new feature branch
+
+  ```
+  git checkout -b your-feature-branch
+  ```
+
+- Commit your change and push it to your repo 
+
+  ```
+  git commit -m 'new feature'
+  git push origin your-feature-branch
+  ```
+
+- Open a pull request!
