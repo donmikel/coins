@@ -1,6 +1,6 @@
 # Coins Payment Service
 
-This is the system that stores payment and methods to send money between accounts. Final Payment API  you can see the [OpenAPI Specification](https://github.com/donmikel/coins/-/blob/main/api/coins-openapi.yaml),
+This is the system that stores payment and methods to send money between accounts. Final Payment API  you can see the [OpenAPI Specification](https://github.com/donmikel/coins/blob/main/api/coins-openapi.yaml),
 this will help to understand the ways of using.
 
 ### Installing
