@@ -1,0 +1,12 @@
+FROM golang:1.15-alpine AS builder
+WORKDIR /go/src/github.com/donmikel/coins
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo \
+    -o /bin/coins \
+    -mod vendor \
+    github.com/donmikel/coins/cmd/coins
+FROM golang
+COPY --from=builder /bin/coins /bin/coins
+RUN chmod +x /bin/coins
+
+CMD ["/bin/coins"]

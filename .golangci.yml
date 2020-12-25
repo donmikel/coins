@@ -1,0 +1,47 @@
+run:
+  deadline: 1m
+  modules-download-mode: vendor
+  issues-exit-code: 1
+  skip-dirs:
+    - vendor
+  skip-files:
+    - ".*_test\\.go"
+
+output:
+  format: colored-line-number
+
+linters-settings:
+  funlen:
+    lines: 300
+    statements: 200
+  gocognit:
+    min-complexity: 150
+  gocritic:
+    disabled-checks:
+      - ifElseChain
+      - elseif
+
+linters:
+  enable-all: true
+  disable:
+    - goerr113
+    - godox
+    - nestif
+    - godot
+    - gomnd
+    - gochecknoinits
+    - gosec
+    - wsl
+    - lll
+    - maligned
+    - dupl
+    - gocyclo
+    - unparam
+    - gochecknoglobals
+    - varcheck
+    - deadcode
+    - golint
+    - errcheck
+    - godot
+    - nestif
+    - exhaustive

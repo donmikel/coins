@@ -1,0 +1,28 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    environment:
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_USER=user
+      - POSTGRES_DB=coins
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../pg/script.sql:/docker-entrypoint-initdb.d/init.sql
+
+  service:
+    container_name: coins
+    environment:
+      - PORT=8080
+      - ALLOWED_ORIGINS=*
+      - POSTGRES_ADDRESS=postgres:5432
+      - POSTGRES_DATABASE=coins
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+    build:
+      context: ..
+      dockerfile: build/Dockerfile.coins
+    ports:
+      - "8080:8080"

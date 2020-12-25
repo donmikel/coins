@@ -1,0 +1,131 @@
+openapi: 3.0.1
+info:
+  title: Coins Payment Service
+  version: v1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: accounts
+  - name: payments
+
+paths:
+  /accounts:
+    get:
+      tags:
+        - accounts
+      summary: Get all available to send payment accounts
+      responses:
+        200:
+          description: Status Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountsList'
+  /payments:
+    get:
+      tags:
+        - payments
+      summary: Get all payments
+      responses:
+        200:
+          description: Status Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentsList'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - payments
+      summary: Send peyment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentInput'
+      responses:
+        200:
+          description: OK
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    AccountsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Account'
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "bob123"
+        balance:
+          type: number
+          example: 100
+        currency:
+          type: string
+          example: "USD"
+    PaymentsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Payment'
+    Payment:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        from_account:
+          type: string
+          example: "bob123"
+          description: Account from where money will be send
+        to_account:
+          type: string
+          example: "alice456"
+          description: Account where money will be send to
+        amount:
+          type: number
+          example: 100
+          description: Amount of money to send
+        direction:
+          type: integer
+          enum: [ 0, 1 ]
+          description: 0 - Incoming, 1 - Outgoing
+        dt:
+          type: integer
+          description: Create date and time
+    PaymentInput:
+      type: object
+      properties:
+        from_account:
+          type: string
+          example: "bob123"
+          description: Account from where money will be send
+        to_account:
+          type: string
+          example: "alice456"
+          description: Account where money will be send to
+        amount:
+          type: number
+          example: 100
+          description: Amount of money to send
+        direction:
+          type: integer
+          enum: [ 0, 1 ]
+          description: 0 - Incoming, 1 - Outgoing
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
